@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="doc-title">Oferta Gastronómica — Legacy of Restoration · ECORESORT LA PORCADA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================================
+           ECORESORT LA PORCADA · Legacy of Restoration
+           Estética serena inspirada en los cánones de Aman Resorts:
+           paleta natural, tipografía serif, aire, líneas finas.
+           ============================================================ */
+        :root {
+            --ivory:      #F6F3EC;   /* fondo marfil */
+            --card:       #FDFCF8;   /* tarjetas */
+            --ink:        #211E18;   /* texto principal */
+            --ink-deep:   #14120E;   /* negro profundo footer/intro */
+            --stone:      #6F675A;   /* texto secundario */
+            --gold:       #A78D5C;   /* dorado sereno */
+            --gold-soft:  #C3AE85;   /* dorado claro */
+            --hair:       #DCD5C7;   /* líneas capilares */
+        }
+
+        * { box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background-color: var(--ivory);
+            color: var(--ink);
+            font-family: 'Jost', 'Helvetica Neue', Arial, sans-serif;
+            font-weight: 300;
+            font-size: 16.5px;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body.lock { overflow: hidden; }
+
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+            font-weight: 500;
+            color: var(--ink);
+        }
+
+        section[id] { scroll-margin-top: 86px; }
+
+        ::selection { background: var(--gold); color: #fff; }
+
+        /* ============ ENTRADA DE VIDEO (PORTADA CINEMATOGRÁFICA) ============ */
+        #intro-overlay {
+            position: fixed; inset: 0; z-index: 3000;
+            background-color: var(--ink-deep);
+            display: flex; align-items: center; justify-content: center;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+        #intro-overlay.gone { opacity: 0; visibility: hidden; }
+
+        #intro-video {
+            position: absolute; inset: 0;
+            width: 100%; height: 100%;
+            object-fit: cover;
+        }
+        /* Si el vídeo no está disponible, se usa la imagen del hero */
+        #intro-overlay.no-video #intro-video { display: none; }
+        #intro-overlay.no-video {
+            background: url('images/foto_hero.jpg') center / cover no-repeat, var(--ink-deep);
+        }
+
+        .intro-tint {
+            position: absolute; inset: 0; z-index: 1;
+            background: linear-gradient(180deg, rgba(12,10,7,.62) 0%, rgba(12,10,7,.38) 45%, rgba(12,10,7,.68) 100%);
+        }
+
+        .intro-content {
+            position: relative; z-index: 2;
+            text-align: center; color: #F4EFE5;
+            padding: 20px; max-width: 860px;
+        }
+
+        .intro-logo {
+            width: min(235px, 54vw);
+            mix-blend-mode: screen;
+            filter: drop-shadow(0 6px 22px rgba(0,0,0,.5));
+            margin-bottom: 30px;
+        }
+
+        .intro-tagline p {
+            margin: 5px 0;
+            font-size: 12.5px;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: #EAE2D1;
+        }
+        .intro-tagline .tag-sep {
+            color: var(--gold-soft);
+            letter-spacing: .1em;
+        }
+
+        #enter-btn {
+            margin-top: 38px;
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: #F0E7D3;
+            padding: 15px 52px;
+            font-family: inherit;
+            font-size: 12px;
+            letter-spacing: .45em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background .4s, color .4s;
+        }
+        #enter-btn:hover, #enter-btn:focus {
+            background: var(--gold);
+            color: var(--ink-deep);
+            outline: none;
+        }
+
+        .intro-bottom {
+            position: absolute; bottom: 26px; left: 0; right: 0;
+            text-align: center; z-index: 2;
+            pointer-events: none;   /* decorativo: NUNCA debe bloquear el botón ENTRAR */
+        }
+        .intro-bottom p {
+            margin: 0 0 10px;
+            font-size: 10.5px;
+            letter-spacing: .36em;
+            text-transform: uppercase;
+            color: #C9BFAB;
+        }
+        .intro-promoter {
+            height: 74px;
+            mix-blend-mode: screen;
+            pointer-events: none;
+        }
+
+        /* ---- Aviso de música en la portada ---- */
+        #music-hint {
+            margin-top: 22px;
+            font-size: 10.5px;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: #D6CBAF;
+            transition: opacity .8s ease;
+            animation: hintGlow 2.6s ease-in-out infinite;
+        }
+        #music-hint.off { opacity: 0; visibility: hidden; transition: opacity .8s ease, visibility .8s ease; animation: none; }
+        #music-hint .mh-error { display: none; color: #E8C9A0; }
+        #music-hint.error { animation: none; }
+        #music-hint.error .mh-default { display: none; }
+        #music-hint.error .mh-error { display: inline; }
+        @keyframes hintGlow { 0%,100% { opacity: .95; } 50% { opacity: .45; } }
+
+        /* Pantallas poco altas: más aire para el botón ENTRAR */
+        @media (max-height: 760px) {
+            .intro-logo { margin-bottom: 18px; }
+            #enter-btn { margin-top: 24px; padding: 13px 46px; }
+            #music-hint { margin-top: 14px; }
+            .intro-bottom { bottom: 14px; }
+            .intro-promoter { height: 52px; }
+        }
+
+        /* ============ VÍDEO DE FONDO DE LA PRESENTACIÓN ============
+           PORCADAY3.MP4 permanece detrás de TODO el desarrollo de la
+           oferta, siempre silenciado (solo imagen), con un velo marfil
+           que preserva la legibilidad (estética serena Aman). */
+        #bg-video-wrap {
+            position: fixed; inset: 0; z-index: -1;
+            overflow: hidden;
+            background: var(--ivory);
+        }
+        #bg-video-wrap video {
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+        }
+        .bg-veil {
+            position: absolute; inset: 0;
+            background: linear-gradient(180deg,
+                rgba(246,243,236,.30) 0%,
+                rgba(246,243,236,.66) 30%,
+                rgba(246,243,236,.72) 100%);
+        }
+        body.no-bg-video #bg-video-wrap { display: none; }
+
+        /* ============ BARRA SUPERIOR ============ */
+        #site-bar {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1500;
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 20px;
+            padding: 13px 34px;
+            background: rgba(246,243,236,.93);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--hair);
+            transition: opacity .8s ease, transform .8s ease;
+        }
+        body:not(.entered) #site-bar {
+            opacity: 0; transform: translateY(-100%); pointer-events: none;
+        }
+        .brand { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+        .brand img { height: 46px; display: block; border: 1px solid var(--hair); }
+        .brand-name {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 19px; letter-spacing: .3em; color: var(--ink);
+        }
+        #site-bar nav { display: flex; gap: 32px; }
+        #site-bar nav a {
+            color: var(--stone); text-decoration: none;
+            font-size: 11.5px; letter-spacing: .26em; text-transform: uppercase;
+            transition: color .3s;
+        }
+        #site-bar nav a:hover { color: var(--gold); }
+        .bar-controls { display: flex; align-items: center; gap: 10px; }
+
+        .ctrl-btn {
+            background: transparent;
+            border: 1px solid var(--hair);
+            color: var(--ink);
+            padding: 9px 16px;
+            font-family: inherit;
+            font-size: 11px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: border-color .3s, color .3s;
+            white-space: nowrap;
+        }
+        .ctrl-btn:hover { border-color: var(--gold); color: var(--gold); }
+        #music-toggle.playing { border-color: var(--gold); color: var(--gold); }
+        #music-toggle.disabled { opacity: .35; cursor: default; }
+        .mnote { display: inline-block; }
+        #music-toggle.playing .mnote { animation: pulse 1.6s ease-in-out infinite; }
+        @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: .35; } }
+
+        /* ============ HERO ============ */
+        .hero {
+            min-height: 94vh;
+            background: transparent;   /* deja ver el vídeo de fondo PORCADAY3 */
+            position: relative;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center;
+        }
+        .hero::before {
+            content: ''; position: absolute; inset: 0;
+            background: rgba(14,12,9,.52);
+        }
+        /* Si PORCADAY3.MP4 no está disponible, se recupera el diseño
+           clásico con la imagen fija del hero */
+        body.no-bg-video .hero {
+            background: url('images/foto_hero.jpg') center / cover no-repeat;
+        }
+        .hero-content { position: relative; z-index: 2; color: #F4EFE5; padding: 130px 22px 90px; }
+
+        .hero-logo {
+            max-width: 185px;
+            border: 1px solid rgba(195,174,133,.6);
+            background: rgba(12,10,8,.45);
+            padding: 12px;
+            margin-bottom: 36px;
+        }
+        .hero-kicker {
+            margin: 0 0 18px;
+            font-size: 11.5px; letter-spacing: .5em; text-transform: uppercase;
+            color: #D9CDB4;
+        }
+        .hero h1 {
+            font-size: clamp(2.6em, 6vw, 4.6em);
+            margin: 0; color: #F6F1E6;
+            letter-spacing: .06em;
+            text-shadow: 0 2px 26px rgba(0,0,0,.4);
+        }
+        .hero-rule { width: 72px; height: 1px; background: var(--gold); margin: 28px auto; }
+        .hero-sub {
+            margin: 0; font-size: 12.5px; letter-spacing: .3em; text-transform: uppercase;
+            color: #D9CDB4;
+        }
+
+        #scroll-hint {
+            position: absolute; bottom: 28px; left: 50%; z-index: 2;
+            background: none; border: none; cursor: pointer;
+            color: #E5DCC8; font-family: inherit;
+            font-size: 10.5px; letter-spacing: .34em; text-transform: uppercase;
+            animation: bob 2.8s ease-in-out infinite;
+        }
+        @keyframes bob {
+            0%,100% { transform: translate(-50%, 0); }
+            50%     { transform: translate(-50%, 9px); }
+        }
+
+        /* ============ SECCIONES ============ */
+        main {
+            max-width: 1160px; margin: 0 auto; padding: 0 34px;
+            background: rgba(246,243,236,.78);   /* panel marfil translúcido sobre el vídeo */
+            border-left: 1px solid rgba(220,213,199,.55);
+            border-right: 1px solid rgba(220,213,199,.55);
+        }
+        body.no-bg-video main { background: var(--ivory); border-color: transparent; }
+
+        .content-section { padding: 96px 0 26px; }
+
+        .section-head {
+            display: flex; align-items: center; gap: 18px;
+            margin-bottom: 16px;
+        }
+        .sec-num {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 16px; color: var(--gold); letter-spacing: .12em;
+        }
+        .sec-num::after {
+            content: ''; display: inline-block;
+            width: 48px; height: 1px; background: var(--gold);
+            margin-left: 18px; vertical-align: middle; opacity: .7;
+        }
+        .sec-kicker {
+            font-size: 11px; letter-spacing: .42em; text-transform: uppercase;
+            color: var(--stone);
+        }
+        h2 {
+            font-size: clamp(2em, 4vw, 2.9em);
+            margin: 0 0 24px; line-height: 1.15;
+        }
+        .lead { max-width: 800px; color: var(--stone); font-size: 1.06em; margin: 0; }
+
+        /* --- Establecimientos (restaurantes y bares) --- */
+        .establishment {
+            display: grid;
+            grid-template-columns: minmax(280px, 420px) 1fr;
+            gap: 52px;
+            background: var(--card);
+            border: 1px solid var(--hair);
+            padding: 44px;
+            margin: 0 0 54px;
+            align-items: start;
+        }
+        .establishment:nth-of-type(even) { grid-template-columns: 1fr minmax(280px, 420px); }
+        .establishment:nth-of-type(even) .est-figure { order: 2; }
+
+        .est-figure { margin: 0; position: relative; overflow: hidden; }
+        .est-figure img {
+            width: 100%; height: 310px; object-fit: cover; display: block;
+            filter: saturate(.92);
+            transition: transform .8s ease;
+        }
+        .establishment:hover .est-figure img { transform: scale(1.03); }
+        .est-figure::after {
+            content: ''; position: absolute; inset: 12px;
+            border: 1px solid rgba(246,243,236,.55);
+            pointer-events: none;
+        }
+
+        .establishment h3 { font-size: 1.85em; margin: 0 0 10px; line-height: 1.2; }
+        .est-desc {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-style: italic;
+            font-size: 1.24em; line-height: 1.55;
+            color: var(--stone);
+            margin: 0 0 6px;
+        }
+        .establishment h4 {
+            margin: 26px 0 6px;
+            font-family: 'Jost', Arial, sans-serif;
+            font-size: 11px; font-weight: 500;
+            letter-spacing: .3em; text-transform: uppercase;
+            color: var(--gold);
+        }
+        .establishment-details p { margin: 0; }
+
+        /* --- Capacidad --- */
+        .capacity-summary {
+            background: var(--card);
+            border: 1px solid var(--hair);
+            border-top: 2px solid var(--gold);
+            padding: 54px 60px;
+        }
+        .capacity-lead {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            font-size: 1.4em; color: var(--ink);
+            margin: 0 0 26px;
+        }
+        #capacity-list { list-style: none; margin: 0; padding: 0; }
+        #capacity-list li {
+            padding: 16px 4px;
+            border-bottom: 1px solid var(--hair);
+        }
+        #capacity-list li.total {
+            border-bottom: none;
+            border-top: 1px solid var(--gold);
+            margin-top: 8px;
+            padding: 22px 4px;
+        }
+        #capacity-list .total strong { color: var(--gold); }
+        #capacity-conclusion { margin: 26px 0 0; color: var(--stone); }
+
+        /* ============ FOOTER ============ */
+        footer {
+            background: var(--ink-deep);
+            color: #CFC6B4;
+            text-align: center;
+            padding: 72px 22px 44px;
+            margin-top: 110px;
+        }
+        .footer-logos {
+            display: flex; align-items: center; justify-content: center;
+            gap: 36px; margin-bottom: 36px;
+        }
+        .footer-logos img { height: 78px; mix-blend-mode: screen; }
+        .footer-sep { width: 1px; height: 56px; background: rgba(195,174,133,.5); }
+        #copyright {
+            margin: 0 0 9px;
+            font-size: 11.5px; letter-spacing: .24em;
+            color: #EAE1CB;
+        }
+        #rights {
+            margin: 0;
+            font-size: 10.5px; letter-spacing: .26em; text-transform: uppercase;
+            color: #8F8674;
+        }
+
+        /* ============ ANIMACIÓN DE APARICIÓN ============ */
+        .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s ease, transform .9s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
+
+        /* ============ RESPONSIVE ============ */
+        @media (max-width: 980px) {
+            #site-bar nav { display: none; }
+            .brand-name { display: none; }
+            .establishment,
+            .establishment:nth-of-type(even) { grid-template-columns: 1fr; gap: 26px; padding: 28px; }
+            .establishment:nth-of-type(even) .est-figure { order: 0; }
+            .capacity-summary { padding: 32px 26px; }
+            main { padding: 0 20px; }
+            .content-section { padding: 68px 0 12px; }
+            #site-bar { padding: 11px 18px; }
+            #music-hint { font-size: 9px; letter-spacing: .2em; padding: 0 12px; }
+        }
+
+        @media (max-width: 520px) {
+            .intro-logo { width: min(190px, 58vw); }
+            .footer-logos { gap: 20px; }
+            .footer-logos img { height: 60px; }
+            .intro-promoter { height: 60px; }
+        }
+
+        /* ============ ACCESIBILIDAD ============ */
+        @media (prefers-reduced-motion: reduce) {
+            html { scroll-behavior: auto; }
+            .reveal { opacity: 1; transform: none; transition: none; }
+            #scroll-hint { animation: none; transform: translate(-50%, 0); }
+            #music-toggle.playing .mnote { animation: none; }
+            #music-hint { animation: none; }
+            .establishment:hover .est-figure img { transform: none; }
+        }
+    </style>
+</head>
+<body class="lock">
+
+<noscript>
+    <style>#intro-overlay{display:none}#bg-video-wrap{display:none}body{overflow:auto!important}body:not(.entered) #site-bar{opacity:1;transform:none;pointer-events:auto}</style>
+</noscript>
+
+<!-- ============ VÍDEO DE FONDO DEL DESARROLLO (PORCADAY3.MP4) ============ -->
+<div id="bg-video-wrap" aria-hidden="true">
+    <video id="bg-video-el" muted loop playsinline preload="auto"></video>
+    <div class="bg-veil"></div>
+</div>
+
+<!-- ================= ENTRADA: VIDEO DE BIENVENIDA ================= -->
+<div id="intro-overlay">
+    <video id="intro-video" autoplay muted loop playsinline preload="auto"></video>
+    <div class="intro-tint"></div>
+
+    <div class="intro-content">
+        <img src="images/ECORESORT.png" alt="ECORESORT LA PORCADA" class="intro-logo">
+        <div class="intro-tagline">
+            <p>Presentación del Área de Restauración</p>
+            <p class="tag-sep">— &nbsp;Legacy of Restoration&nbsp; —</p>
+            <p>Dining &amp; Restoration Presentation</p>
+        </div>
+        <button id="enter-btn" onclick="try { enterSite(); } catch (e) { try { porcadaEnter(); } catch (e2) {} }">Entrar</button>
+        <div id="music-hint">
+            <span class="mh-default">&#9834; &nbsp;Pulse en cualquier punto para escuchar la música&nbsp;·&nbsp;Tap anywhere to start the music</span>
+            <span class="mh-error">&#9834; &nbsp;No se encuentra audio/Wheel of Time.mp3 — revise el nombre del archivo&nbsp;·&nbsp;Song not found — please check the file name</span>
+        </div>
+    </div>
+
+    <div class="intro-bottom">
+        <p id="promoted-label">Un proyecto de</p>
+        <img src="images/LOGO.png" alt="TAKYMA Investment Pioneer" class="intro-promoter">
+    </div>
+</div>
+
+<script>
+    /* ---- ENTRADA A PRUEBA DE FALLOS --------------------------------
+       Esta función mínima se define ANTES que el script principal:
+       aunque cualquier otro código fallara, el botón ENTRAR siempre
+       cerrará la portada y arrancará el vídeo de fondo. */
+    function porcadaEnter() {
+        var b = document.body;
+        if (b.className.indexOf('entered') === -1) b.className += ' entered';
+        b.className = b.className.replace(/(^|\s)lock(\s|$)/g, ' ');
+        var ov = document.getElementById('intro-overlay');
+        if (ov) {
+            ov.classList.add('gone');
+            setTimeout(function () { if (ov.parentNode) ov.parentNode.removeChild(ov); }, 1100);
+        }
+        var iv = document.getElementById('intro-video');
+        try { if (iv) { iv.muted = true; iv.volume = 0; iv.pause(); } } catch (e) {}
+        var bv = document.getElementById('bg-video-el');
+        try { if (bv) { bv.muted = true; bv.volume = 0; bv.play(); } } catch (e) {}
+        try { window.scrollTo(0, 0); } catch (e) {}
+    }
+</script>
+
+<!-- ================= BARRA SUPERIOR ================= -->
+<header id="site-bar">
+    <a class="brand" href="#top">
+        <img src="images/ECORESORT.png" alt="ECORESORT LA PORCADA">
+        <span class="brand-name">LA PORCADA</span>
+    </a>
+    <nav>
+        <a href="#restaurants" id="nav-restaurants">Restaurantes</a>
+        <a href="#capacity" id="nav-capacity">Capacidad</a>
+        <a href="#bars" id="nav-bars">Bares</a>
+    </nav>
+    <div class="bar-controls">
+        <button id="music-toggle" class="ctrl-btn" title="Música ambiental">
+            <span class="mnote">&#9834;</span>&nbsp;<span id="music-label">Música</span>
+        </button>
+        <button id="language-toggle" class="ctrl-btn">EN</button>
+    </div>
+</header>
+
+<!-- ================= PORTADA / HERO ================= -->
+<section id="top" class="hero">
+    <div class="hero-content">
+        <img src="images/legacy.png" alt="Legacy of Restoration" class="hero-logo">
+        <p class="hero-kicker">ECORESORT LA PORCADA</p>
+        <h1 id="main-title">OFERTA GASTRONÓMICA DEL RESORT</h1>
+        <div class="hero-rule"></div>
+        <p class="hero-sub">Tierra y Sabor &nbsp;·&nbsp; El Jardín Tropical &nbsp;·&nbsp; Fuego y Sal</p>
+    </div>
+    <button id="scroll-hint">&#9660; &nbsp;<span id="scroll-hint-text">Descubrir</span></button>
+</section>
+
+<main>
+
+    <!-- INTRODUCCIÓN / ESTRATEGIA -->
+    <section id="strategy" class="content-section">
+        <div class="section-head reveal">
+            <span class="sec-num">01</span>
+            <span class="sec-kicker" id="kick-strategy">Visión</span>
+        </div>
+        <h2 id="strategy-title" class="reveal">Estrategia Gastronómica</h2>
+        <p id="strategy-text" class="lead reveal">Con tres restaurantes, podemos segmentar las experiencias y la oferta, asegurando que los huéspedes tengan opciones para cada momento del día y estado de ánimo, distribuyendo la demanda de manera eficiente.</p>
+    </section>
+
+    <!-- RESTAURANTES -->
+    <section id="restaurants" class="content-section">
+        <div class="section-head reveal">
+            <span class="sec-num">02</span>
+            <span class="sec-kicker" id="kick-restaurants">Restaurantes</span>
+        </div>
+        <h2 id="restaurants-title" class="reveal">Nuestros Restaurantes</h2>
+
+        <article class="establishment reveal">
+            <figure class="est-figure">
+                <img src="images/tierraysabor.png" alt="Restaurante Tierra y Sabor">
+            </figure>
+            <div class="establishment-details">
+                <h3 id="rest1-title">1. Restaurante Principal Interior: "Tierra y Sabor"</h3>
+                <p id="rest1-desc" class="est-desc">Este sigue siendo el buque insignia, un espacio elegante para cenas más formales y una experiencia culinaria completa.</p>
+                <h4 id="rest1-concept-title">Concepto:</h4>
+                <p id="rest1-concept">Cocina de Fusión Latinoamericana de Autor, con un fuerte énfasis en ingredientes frescos de la región, mariscos del Pacífico y productos orgánicos de la propia isla o de granjas cercanas.</p>
+                <h4 id="rest1-location-title">Ubicación:</h4>
+                <p id="rest1-location">Un brazo de la "V" del edificio principal, con amplios ventanales que ofrecen vistas panorámicas al mar y la piscina infinita.</p>
+                <h4 id="rest1-atmosphere-title">Ambiente:</h4>
+                <p id="rest1-atmosphere">Sofisticado pero relajado, con un diseño interior que integra maderas oscuras, piedra local pulida, iluminación ambiental cálida y detalles artesanales.</p>
+                <h4 id="rest1-capacity-title">Capacidad de Asientos en una sola sentada:</h4>
+                <p id="rest1-capacity">Aproximadamente 160 - 170 comensales.</p>
+                <h4 id="rest1-total-title">Estimación Total por Noche:</h4>
+                <p id="rest1-total">190 - 230 comensales.</p>
+            </div>
+        </article>
+
+        <article class="establishment reveal">
+            <figure class="est-figure">
+                <img src="images/eljardintropical.png" alt="Restaurante El Jardín Tropical">
+            </figure>
+            <div class="establishment-details">
+                <h3 id="rest2-title">2. Segundo Restaurante Interior: "El Jardín Tropical"</h3>
+                <p id="rest2-desc" class="est-desc">Un concepto más casual y luminoso, perfecto para el desayuno y el almuerzo, y una cena más relajada con un toque de frescura.</p>
+                <h4 id="rest2-concept-title">Concepto:</h4>
+                <p id="rest2-concept">Buffet de Desayuno Gourmet y Cocina Fresca/Saludable para Almuerzo y Cena. Se centraría en estaciones interactivas (zumos naturales, estaciones de huevos, ensaladas, pastas ligeras, grill saludable).</p>
+                <h4 id="rest2-location-title">Ubicación:</h4>
+                <p id="rest2-location">El otro brazo de la "V" en el edificio principal, o en una sección luminosa adyacente al lobby, con vistas a jardines interiores o a la vegetación exuberante.</p>
+                <h4 id="rest2-atmosphere-title">Ambiente:</h4>
+                <p id="rest2-atmosphere">Fresco, luminoso y lleno de vida, con mucha luz natural, plantas colgantes, muebles de mimbre o bambú y toques de colores vibrantes.</p>
+                <h4 id="rest2-capacity-title">Capacidad de Asientos en una sola sentada:</h4>
+                <p id="rest2-capacity">Aproximadamente 140 comensales.</p>
+                <h4 id="rest2-total-title">Estimación Total por Noche:</h4>
+                <p id="rest2-total">210 - 250 comensales (si ofrece cena).</p>
+            </div>
+        </article>
+
+        <article class="establishment reveal">
+            <figure class="est-figure">
+                <img src="images/fuegoysal.png" alt="Restaurante Fuego y Sal">
+            </figure>
+            <div class="establishment-details">
+                <h3 id="rest3-title">3. Restaurante Exterior: "Fuego y Sal"</h3>
+                <p id="rest3-desc" class="est-desc">Este es el concepto más auténtico y relajado, la joya de la corona para una experiencia al aire libre.</p>
+                <h4 id="rest3-concept-title">Concepto:</h4>
+                <p id="rest3-concept">Cocina sencilla, rústica y auténtica, centrada en la barbacoa (BBQ) de mariscos y carnes, y pizzas o panes hechos en horno de leña.</p>
+                <h4 id="rest3-location-title">Ubicación:</h4>
+                <p id="rest3-location">Directamente entre la piscina infinita y la playa, con mesas sobre un deck de madera que se extiende hasta la arena.</p>
+                <h4 id="rest3-atmosphere-title">Ambiente:</h4>
+                <p id="rest3-atmosphere">Totalmente informal y playero-chic. Mesas de madera rústica, sillas o bancos cómodos, sombrillas de palma o velas tensionadas para sombra.</p>
+                <h4 id="rest3-capacity-title">Capacidad de Asientos en una sola sentada:</h4>
+                <p id="rest3-capacity">Aproximadamente 120 - 145 comensales.</p>
+                <h4 id="rest3-total-title">Estimación Total por Noche:</h4>
+                <p id="rest3-total">180 - 240 comensales.</p>
+            </div>
+        </article>
+    </section>
+
+    <!-- CAPACIDAD -->
+    <section id="capacity" class="content-section">
+        <div class="section-head reveal">
+            <span class="sec-num">03</span>
+            <span class="sec-kicker" id="kick-capacity">Capacidad</span>
+        </div>
+        <h2 id="capacity-title" class="reveal">Capacidad Total de Servicio</h2>
+        <div class="capacity-summary reveal">
+            <p id="capacity-subtitle" class="capacity-lead">Capacidad Total de Servicio de Restaurantes por Noche (para 160 habitaciones):</p>
+            <ul id="capacity-list">
+                <li id="capacity-item1"><strong>"Tierra y Sabor"</strong> (Interior, formal): 190 - 230 comensales</li>
+                <li id="capacity-item2"><strong>"El Jardín Tropical"</strong> (Interior, casual): 210 - 250 comensales (en cena)</li>
+                <li id="capacity-item3"><strong>"Fuego y Sal"</strong> (Exterior, barbacoa): 180 - 240 comensales</li>
+                <li id="capacity-item-total" class="total"><strong>Total Estimado Combinado:</strong> 580 - 720 comensales por noche.</li>
+            </ul>
+            <p id="capacity-conclusion">Esta capacidad combinada es sobradamente suficiente para un resort de 160 habitaciones (320-400 huéspedes), garantizando que todos los huéspedes puedan cenar cómodamente.</p>
+        </div>
+    </section>
+
+    <!-- BARES -->
+    <section id="bars" class="content-section">
+        <div class="section-head reveal">
+            <span class="sec-num">04</span>
+            <span class="sec-kicker" id="kick-bars">Bares</span>
+        </div>
+        <h2 id="bars-title" class="reveal">Servicio de Bar</h2>
+        <p id="bars-intro" class="lead reveal">Con 160 habitaciones, ofrecer opciones de bar que se adapten a diferentes momentos del día y preferencias es clave.</p>
+
+        <article class="establishment reveal">
+            <figure class="est-figure">
+                <img src="images/atardecer.png" alt="Bar Atardecer Lounge">
+            </figure>
+            <div class="establishment-details">
+                <h3 id="bar1-title">1. Bar Lounge Interior: "Atardecer Lounge"</h3>
+                <p id="bar1-desc" class="est-desc">Este bar será un punto de encuentro elegante y relajado dentro del edificio principal, ideal para disfrutar de cócteles al atardecer.</p>
+                <h4 id="bar1-concept-title">Concepto:</h4>
+                <p id="bar1-concept">Un lounge bar sofisticado, con una carta de coctelería de autor que utiliza ingredientes botánicos locales y destilados premium.</p>
+                <h4 id="bar1-location-title">Ubicación:</h4>
+                <p id="bar1-location">Estratégicamente situado en la planta baja del edificio principal, adyacente al gran lobby y con grandes ventanales retráctiles que se abren completamente hacia la piscina infinita y el vasto mar.</p>
+                <h4 id="bar1-atmosphere-title">Atmósfera:</h4>
+                <p id="bar1-atmosphere">De lujo sereno, con una iluminación tenue y cálida que resalta las texturas naturales. El mobiliario será de diseño, con sofás y sillones cómodos.</p>
+                <h4 id="bar1-surface-title">Superficie Estimada:</h4>
+                <p id="bar1-surface">Aproximadamente 200 - 250 m².</p>
+            </div>
+        </article>
+
+        <article class="establishment reveal">
+            <figure class="est-figure">
+                <img src="images/brisas.png" alt="Bar Brisas y Ritmo">
+            </figure>
+            <div class="establishment-details">
+                <h3 id="bar2-title">2. Bar de Playa y Piscina: "Brisas y Ritmo"</h3>
+                <p id="bar2-desc" class="est-desc">Este bar será el complemento perfecto para el restaurante 'Fuego y Sal', ofreciendo una experiencia más animada y tropical.</p>
+                <h4 id="bar2-concept-title">Concepto:</h4>
+                <p id="bar2-concept">Un bar playero que sirve cócteles tropicales, cervezas artesanales, bebidas refrescantes y snacks ligeros. Ideal para un día de sol o una noche estrellada.</p>
+                <h4 id="bar2-location-title">Ubicación:</h4>
+                <p id="bar2-location">Coexistiendo con el restaurante 'Fuego y Sal', en el deck de madera y la arena entre la piscina infinita y la playa.</p>
+                <h4 id="bar2-atmosphere-title">Atmósfera:</h4>
+                <p id="bar2-atmosphere">Casual y tropical, con una estructura de techo tipo palapa o pérgolas de bambú que proporcionan sombra. El suelo podría ser una combinación de deck de madera y arena compactada.</p>
+                <h4 id="bar2-surface-title">Superficie Estimada:</h4>
+                <p id="bar2-surface">Aproximadamente 100 - 150 m² (como parte de la superficie total del 'Fuego y Sal').</p>
+            </div>
+        </article>
+    </section>
+
+</main>
+
+<!-- ================= PIE DE PÁGINA ================= -->
+<footer>
+    <div class="footer-logos">
+        <img src="images/ECORESORT.png" alt="ECORESORT LA PORCADA">
+        <span class="footer-sep"></span>
+        <img src="images/LOGO.png" alt="TAKYMA Investment Pioneer">
+    </div>
+    <p id="copyright">&copy; 2026 ECORESORT LA PORCADA by TAKYMA INVESTMENT PIONEER</p>
+    <p id="rights">Todos los derechos reservados</p>
+</footer>
+
+<script>
+    /* ============================================================
+       VIDEO DE ENTRADA · PORCADAY1.MP4 (carpeta video/)
+       Se prueban varias variantes de nombre por compatibilidad.
+       ============================================================ */
+    var VIDEO_SOURCES = [
+        'video/PORCADAY1.MP4',
+        'video/porcaday1.mp4',
+        'video/PORCADAY1.mp4',
+        'video/Porcaday1.mp4'
+    ];
+
+    /* ============================================================
+       VÍDEO DE FONDO DEL DESARROLLO · PORCADAY3.MP4 (carpeta video/)
+       Acompaña toda la presentación tras ENTRAR, SIEMPRE SILENCIADO
+       (solo imagen). Si no se encuentra, la página vuelve
+       automáticamente al diseño con imagen fija.
+       ============================================================ */
+    var BG_VIDEO_SOURCES = [
+        'video/PORCADAY3.MP4',
+        'video/porcaday3.mp4',
+        'video/PORCADAY3.mp4',
+        'video/Porcaday3.mp4'
+    ];
+
+    /* ============================================================
+       HILO MUSICAL · Wheel of Time.mp3 (carpeta audio/)
+       Es la banda sonora de TODA la presentación (el vídeo se
+       reproduce siempre silenciado). Se prueban muchas variantes
+       de nombre y, si no se encuentra, se vuelve a buscar en cada
+       clic (por si el archivo se añadió después de abrir la página).
+       ============================================================ */
+    var MUSIC_SOURCES = [
+        'audio/Wheel of Time.mp3',
+        'audio/Wheel Of Time.mp3',
+        'audio/Wheel of Time.MP3',
+        'audio/WHEEL OF TIME.MP3',
+        'audio/wheel of time.mp3',
+        'audio/Wheel of Time.m4a',
+        'audio/Wheel of Time.wav',
+        'audio/Wheel-of-Time.mp3',
+        'audio/Wheel_of_Time.mp3',
+        'music/Wheel of Time.mp3',
+        'Wheel of Time.mp3',
+        'Wheel of Time.m4a',
+        'audio/Wheel of Time.ogg',
+        'audio/Wheel of Time.aac',
+        'audio/WheelOfTime.mp3',
+        'audio/WHEELOFTIME.mp3',
+        'audio/Wheel of time.mp3'
+    ];
+
+    /* ============ Objeto con todas las traducciones ============ */
+    var translations = {
+        es: {
+            "doc-title": "Oferta Gastronómica — Legacy of Restoration · ECORESORT LA PORCADA",
+            "enter-btn": "Entrar",
+            "promoted-label": "Un proyecto de",
+            "scroll-hint-text": "Descubrir",
+            "music-label": "Música",
+            "nav-restaurants": "Restaurantes",
+            "nav-capacity": "Capacidad",
+            "nav-bars": "Bares",
+            "kick-strategy": "Visión",
+            "kick-restaurants": "Restaurantes",
+            "kick-capacity": "Capacidad",
+            "kick-bars": "Bares",
+            "main-title": "OFERTA GASTRONÓMICA DEL RESORT",
+            "strategy-title": "Estrategia Gastronómica",
+            "strategy-text": "Con tres restaurantes, podemos segmentar las experiencias y la oferta, asegurando que los huéspedes tengan opciones para cada momento del día y estado de ánimo, distribuyendo la demanda de manera eficiente.",
+            "restaurants-title": "Nuestros Restaurantes",
+            "rest1-title": '1. Restaurante Principal Interior: "Tierra y Sabor"',
+            "rest1-desc": "Este sigue siendo el buque insignia, un espacio elegante para cenas más formales y una experiencia culinaria completa.",
+            "rest1-concept-title": "Concepto:",
+            "rest1-concept": "Cocina de Fusión Latinoamericana de Autor, con un fuerte énfasis en ingredientes frescos de la región, mariscos del Pacífico y productos orgánicos de la propia isla o de granjas cercanas.",
+            "rest1-location-title": "Ubicación:",
+            "rest1-location": "Un brazo de la 'V' del edificio principal, con amplios ventanales que ofrecen vistas panorámicas al mar y la piscina infinita.",
+            "rest1-atmosphere-title": "Ambiente:",
+            "rest1-atmosphere": "Sofisticado pero relajado, con un diseño interior que integra maderas oscuras, piedra local pulida, iluminación ambiental cálida y detalles artesanales.",
+            "rest1-capacity-title": "Capacidad de Asientos en una sola sentada:",
+            "rest1-capacity": "Aproximadamente 160 - 170 comensales.",
+            "rest1-total-title": "Estimación Total por Noche:",
+            "rest1-total": "190 - 230 comensales.",
+            "rest2-title": '2. Segundo Restaurante Interior: "El Jardín Tropical"',
+            "rest2-desc": "Un concepto más casual y luminoso, perfecto para el desayuno y el almuerzo, y una cena más relajada con un toque de frescura.",
+            "rest2-concept-title": "Concepto:",
+            "rest2-concept": "Buffet de Desayuno Gourmet y Cocina Fresca/Saludable para Almuerzo y Cena. Se centraría en estaciones interactivas (zumos naturales, estaciones de huevos, ensaladas, pastas ligeras, grill saludable).",
+            "rest2-location-title": "Ubicación:",
+            "rest2-location": "El otro brazo de la 'V' en el edificio principal, o en una sección luminosa adyacente al lobby, con vistas a jardines interiores o a la vegetación exuberante.",
+            "rest2-atmosphere-title": "Ambiente:",
+            "rest2-atmosphere": "Fresco, luminoso y lleno de vida, con mucha luz natural, plantas colgantes, muebles de mimbre o bambú y toques de colores vibrantes.",
+            "rest2-capacity-title": "Capacidad de Asientos en una sola sentada:",
+            "rest2-capacity": "Aproximadamente 140 comensales.",
+            "rest2-total-title": "Estimación Total por Noche:",
+            "rest2-total": "210 - 250 comensales (si ofrece cena).",
+            "rest3-title": '3. Restaurante Exterior: "Fuego y Sal"',
+            "rest3-desc": "Este es el concepto más auténtico y relajado, la joya de la corona para una experiencia al aire libre.",
+            "rest3-concept-title": "Concepto:",
+            "rest3-concept": "Cocina sencilla, rústica y auténtica, centrada en la barbacoa (BBQ) de mariscos y carnes, y pizzas o panes hechos en horno de leña.",
+            "rest3-location-title": "Ubicación:",
+            "rest3-location": "Directamente entre la piscina infinita y la playa, con mesas sobre un deck de madera que se extiende hasta la arena.",
+            "rest3-atmosphere-title": "Ambiente:",
+            "rest3-atmosphere": "Totalmente informal y playero-chic. Mesas de madera rústica, sillas o bancos cómodos, sombrillas de palma o velas tensionadas para sombra.",
+            "rest3-capacity-title": "Capacidad de Asientos en una sola sentada:",
+            "rest3-capacity": "Aproximadamente 120 - 145 comensales.",
+            "rest3-total-title": "Estimación Total por Noche:",
+            "rest3-total": "180 - 240 comensales.",
+            "capacity-title": "Capacidad Total de Servicio",
+            "capacity-subtitle": "Capacidad Total de Servicio de Restaurantes por Noche (para 160 habitaciones):",
+            "capacity-item1": '<strong>"Tierra y Sabor"</strong> (Interior, formal): 190 - 230 comensales',
+            "capacity-item2": '<strong>"El Jardín Tropical"</strong> (Interior, casual): 210 - 250 comensales (en cena)',
+            "capacity-item3": '<strong>"Fuego y Sal"</strong> (Exterior, barbacoa): 180 - 240 comensales',
+            "capacity-item-total": '<strong>Total Estimado Combinado:</strong> 580 - 720 comensales por noche.',
+            "capacity-conclusion": "Esta capacidad combinada es sobradamente suficiente para un resort de 160 habitaciones (320-400 huéspedes), garantizando que todos los huéspedes puedan cenar cómodamente.",
+            "bars-title": "Servicio de Bar",
+            "bars-intro": "Con 160 habitaciones, ofrecer opciones de bar que se adapten a diferentes momentos del día y preferencias es clave.",
+            "bar1-title": '1. Bar Lounge Interior: "Atardecer Lounge"',
+            "bar1-desc": "Este bar será un punto de encuentro elegante y relajado dentro del edificio principal, ideal para disfrutar de cócteles al atardecer.",
+            "bar1-concept-title": "Concepto:",
+            "bar1-concept": "Un lounge bar sofisticado, con una carta de coctelería de autor que utiliza ingredientes botánicos locales y destilados premium.",
+            "bar1-location-title": "Ubicación:",
+            "bar1-location": "Estratégicamente situado en la planta baja del edificio principal, adyacente al gran lobby y con grandes ventanales retráctiles que se abren completamente hacia la piscina infinita y el vasto mar.",
+            "bar1-atmosphere-title": "Atmósfera:",
+            "bar1-atmosphere": "De lujo sereno, con una iluminación tenue y cálida que resalta las texturas naturales. El mobiliario será de diseño, con sofás y sillones cómodos.",
+            "bar1-surface-title": "Superficie Estimada:",
+            "bar1-surface": "Aproximadamente 200 - 250 m².",
+            "bar2-title": '2. Bar de Playa y Piscina: "Brisas y Ritmo"',
+            "bar2-desc": "Este bar será el complemento perfecto para el restaurante 'Fuego y Sal', ofreciendo una experiencia más animada y tropical.",
+            "bar2-concept-title": "Concepto:",
+            "bar2-concept": "Un bar playero que sirve cócteles tropicales, cervezas artesanales, bebidas refrescantes y snacks ligeros. Ideal para un día de sol o una noche estrellada.",
+            "bar2-location-title": "Ubicación:",
+            "bar2-location": "Coexistiendo con el restaurante 'Fuego y Sal', en el deck de madera y la arena entre la piscina infinita y la playa.",
+            "bar2-atmosphere-title": "Atmósfera:",
+            "bar2-atmosphere": "Casual y tropical, con una estructura de techo tipo palapa o pérgolas de bambú que proporcionan sombra. El suelo podría ser una combinación de deck de madera y arena compactada.",
+            "bar2-surface-title": "Superficie Estimada:",
+            "bar2-surface": "Aproximadamente 100 - 150 m² (como parte de la superficie total del 'Fuego y Sal').",
+            "rights": "Todos los derechos reservados",
+            "copyright": "&copy; 2026 ECORESORT LA PORCADA by TAKYMA INVESTMENT PIONEER"
+        },
+        en: {
+            "doc-title": "Culinary Offering — Legacy of Restoration · ECORESORT LA PORCADA",
+            "enter-btn": "Enter",
+            "promoted-label": "A project by",
+            "scroll-hint-text": "Discover",
+            "music-label": "Music",
+            "nav-restaurants": "Restaurants",
+            "nav-capacity": "Capacity",
+            "nav-bars": "Bars",
+            "kick-strategy": "Vision",
+            "kick-restaurants": "Restaurants",
+            "kick-capacity": "Capacity",
+            "kick-bars": "Bars",
+            "main-title": "RESORT'S CULINARY OFFERING",
+            "strategy-title": "Culinary Strategy",
+            "strategy-text": "With three restaurants, we can segment experiences and offerings, ensuring guests have options for every moment of the day and mood, efficiently distributing demand.",
+            "restaurants-title": "Our Restaurants",
+            "rest1-title": '1. Main Indoor Restaurant: "Tierra y Sabor" (Earth & Flavor)',
+            "rest1-desc": "This remains the flagship, an elegant space for more formal dinners and a complete culinary experience.",
+            "rest1-concept-title": "Concept:",
+            "rest1-concept": "Author's Latin American Fusion Cuisine, with a strong emphasis on fresh regional ingredients, Pacific seafood, and organic products from the island itself or nearby farms.",
+            "rest1-location-title": "Location:",
+            "rest1-location": "One wing of the main building's 'V' shape, with large windows offering panoramic views of the sea and the infinity pool.",
+            "rest1-atmosphere-title": "Ambiance:",
+            "rest1-atmosphere": "Sophisticated yet relaxed, with an interior design that integrates dark woods, polished local stone, warm ambient lighting, and artisanal details.",
+            "rest1-capacity-title": "Seating Capacity per Service:",
+            "rest1-capacity": "Approximately 160 - 170 diners.",
+            "rest1-total-title": "Estimated Total per Night:",
+            "rest1-total": "190 - 230 diners.",
+            "rest2-title": '2. Second Indoor Restaurant: "El Jardín Tropical" (The Tropical Garden)',
+            "rest2-desc": "A more casual and bright concept, perfect for breakfast and lunch, and a more relaxed dinner with a touch of freshness.",
+            "rest2-concept-title": "Concept:",
+            "rest2-concept": "Gourmet Breakfast Buffet and Fresh/Healthy Cuisine for Lunch and Dinner. It would focus on interactive stations (natural juices, egg stations, salads, light pastas, healthy grill).",
+            "rest2-location-title": "Location:",
+            "rest2-location": "The other wing of the main building's 'V' shape, or in a bright section adjacent to the lobby, with views of interior gardens or the lush vegetation at the back of the resort.",
+            "rest2-atmosphere-title": "Ambiance:",
+            "rest2-atmosphere": "Fresh, bright, and lively, with plenty of natural light, hanging plants, wicker or bamboo furniture, and vibrant colors inspired by tropical flowers.",
+            "rest2-capacity-title": "Seating Capacity per Service:",
+            "rest2-capacity": "Approximately 140 diners.",
+            "rest2-total-title": "Estimated Total per Night:",
+            "rest2-total": "210 - 250 diners (if it offers dinner).",
+            "rest3-title": '3. Outdoor Restaurant: "Fuego y Sal" (Fire & Salt)',
+            "rest3-desc": "This is the most authentic and relaxed concept, the crown jewel for an outdoor experience.",
+            "rest3-concept-title": "Concept:",
+            "rest3-concept": "Simple, rustic, and authentic cuisine, centered on seafood and meat barbecue (BBQ), and pizzas or breads made in a wood-fired oven.",
+            "rest3-location-title": "Location:",
+            "rest3-location": "Directly between the infinity pool and the beach, with tables on a wooden deck that extends onto the sand.",
+            "rest3-atmosphere-title": "Ambiance:",
+            "rest3-atmosphere": "Completely informal and beach-chic. Rustic wooden tables, comfortable chairs or benches, palm thatch umbrellas, or tensioned sails for shade.",
+            "rest3-capacity-title": "Seating Capacity per Service:",
+            "rest3-capacity": "Approximately 120 - 145 diners.",
+            "rest3-total-title": "Estimated Total per Night:",
+            "rest3-total": "180 - 240 diners.",
+            "capacity-title": "Total Service Capacity",
+            "capacity-subtitle": "Total Restaurant Service Capacity per Night (for 160 rooms):",
+            "capacity-item1": '<strong>"Tierra y Sabor"</strong> (Indoor, formal): 190 - 230 diners',
+            "capacity-item2": '<strong>"El Jardín Tropical"</strong> (Indoor, casual): 210 - 250 diners (for dinner)',
+            "capacity-item3": '<strong>"Fuego y Sal"</strong> (Outdoor, BBQ): 180 - 240 diners',
+            "capacity-item-total": '<strong>Estimated Combined Total:</strong> 580 - 720 diners per night.',
+            "capacity-conclusion": "This combined capacity is more than sufficient for a 160-room resort (320-400 guests), ensuring all guests can dine comfortably without feeling crowded and with a wide variety of experiences to choose from.",
+            "bars-title": "Bar Service",
+            "bars-intro": "With 160 rooms, offering bar options that adapt to different times of the day and preferences is key.",
+            "bar1-title": '1. Indoor Lounge Bar: "Atardecer Lounge" (Sunset Lounge)',
+            "bar1-desc": "This bar will be an elegant and relaxed meeting point within the main building, ideal for enjoying cocktails at sunset or a quiet drink before or after dinner.",
+            "bar1-concept-title": "Concept:",
+            "bar1-concept": "A sophisticated lounge bar with an author's cocktail menu using local botanical ingredients and premium spirits. It will offer a selection of fine wines, champagnes, and liqueurs, complemented by small gourmet bites.",
+            "bar1-location-title": "Location:",
+            "bar1-location": "Strategically located on the ground floor of the main building, adjacent to the grand lobby with large retractable windows that open fully towards the infinity pool and the vast sea.",
+            "bar1-atmosphere-title": "Ambiance:",
+            "bar1-atmosphere": "Serene luxury, with soft, warm lighting that highlights natural textures. The furniture will be designer, with comfortable sofas and armchairs upholstered in linen and cotton.",
+            "bar1-surface-title": "Estimated Surface Area:",
+            "bar1-surface": "Approximately 200 - 250 m².",
+            "bar2-title": '2. Pool & Beach Bar: "Brisas y Ritmo" (Breezes & Rhythm)',
+            "bar2-desc": "This bar will be the perfect complement to the 'Fuego y Sal' restaurant, offering a more lively and tropical experience.",
+            "bar2-concept-title": "Concept:",
+            "bar2-concept": "A beach bar serving tropical cocktails, craft beers, refreshing drinks, and light snacks. Ideal for a sunny day or a starry night.",
+            "bar2-location-title": "Location:",
+            "bar2-location": "Coexisting with the 'Fuego y Sal' restaurant, on the wooden deck and the sand between the infinity pool and the beach.",
+            "bar2-atmosphere-title": "Ambiance:",
+            "bar2-atmosphere": "Casual and tropical, with a thatched roof or bamboo pergolas providing shade. The flooring could be a combination of wooden decking and compacted sand.",
+            "bar2-surface-title": "Estimated Surface Area:",
+            "bar2-surface": "Approximately 100 - 150 m² (as part of the total area of 'Fuego y Sal').",
+            "rights": "All rights reserved",
+            "copyright": "&copy; 2026 ECORESORT LA PORCADA by TAKYMA INVESTMENT PIONEER"
+        }
+    };
+
+    var currentLanguage = 'es';
+
+    /* ================= VIDEO DE ENTRADA ================= */
+    var introOverlay = document.getElementById('intro-overlay');
+    var introVideo = document.getElementById('intro-video');
+    var videoIdx = 0;
+
+    function tryVideoSource(i) {
+        if (!introVideo) return;
+        if (i >= VIDEO_SOURCES.length) {
+            introOverlay.classList.add('no-video');
+            return;
+        }
+        videoIdx = i;
+        introVideo.defaultMuted = true;
+        introVideo.muted = true;   /* SIEMPRE silenciado: solo se oye la canción */
+        introVideo.volume = 0;
+        introVideo.src = VIDEO_SOURCES[i];
+        introVideo.load();
+        var p = introVideo.play();
+        if (p && p.catch) p.catch(function () {});
+    }
+    if (introVideo) {
+        introVideo.addEventListener('error', function () { tryVideoSource(videoIdx + 1); });
+    }
+
+    /* ================= VÍDEO DE FONDO (PORCADAY3) ================= */
+    var bgVideo = document.getElementById('bg-video-el');
+    var bgIdx = 0;
+
+    function tryBgSource(i) {
+        if (!bgVideo) return;
+        if (i >= BG_VIDEO_SOURCES.length) {
+            /* Sin vídeo de fondo: se recupera el diseño con imagen fija */
+            document.body.classList.add('no-bg-video');
+            return;
+        }
+        bgIdx = i;
+        bgVideo.defaultMuted = true;
+        bgVideo.muted = true;    /* SIEMPRE silenciado: solo imagen */
+        bgVideo.volume = 0;
+        bgVideo.src = BG_VIDEO_SOURCES[i];
+        bgVideo.load();
+    }
+    if (bgVideo) {
+        bgVideo.addEventListener('error', function () { tryBgSource(bgIdx + 1); });
+    }
+
+    function startBgVideo() {
+        if (!bgVideo) return;
+        bgVideo.muted = true;
+        bgVideo.volume = 0;
+        var p = bgVideo.play();
+        if (p && p.catch) p.catch(function () {});
+    }
+
+    /* ================= HILO MUSICAL (banda sonora de la presentación) =================
+       El vídeo se reproduce siempre silenciado; la música ambiental es la
+       canción "Wheel of Time". Los navegadores exigen una interacción del
+       usuario para permitir audio, así que la canción arranca con el primer
+       toque o clic en cualquier punto de la portada (y sigue tras ENTRAR). */
+    var audio = new Audio();
+    audio.loop = true;
+    audio.volume = 0.35;
+    audio.preload = 'auto';
+    audio.src = MUSIC_SOURCES[0];
+
+    var musicIdx = 0;
+    var musicOK = true;          /* hay una carga en curso o conseguida */
+    var musicResolved = false;   /* un archivo se cargó con éxito */
+    var musicWanted = true;      /* el usuario no lo ha silenciado */
+    var lastScan = 0;
+    var musicHint = document.getElementById('music-hint');
+
+    function setMusicHint(state) {
+        if (!musicHint) return;
+        musicHint.classList.remove('off', 'error');
+        if (state) musicHint.classList.add(state);
+    }
+
+    audio.addEventListener('canplay', function () {
+        musicResolved = true;
+        musicOK = true;
+        updateMusicBtn();
+    });
+    audio.addEventListener('play', function () {
+        setMusicHint('off');
+        updateMusicBtn();
+    });
+    audio.addEventListener('pause', updateMusicBtn);
+    audio.addEventListener('error', function () {
+        musicIdx++;
+        if (musicIdx < MUSIC_SOURCES.length) {
+            audio.src = MUSIC_SOURCES[musicIdx];
+        } else {
+            musicOK = false;
+            setMusicHint('error');
+            updateMusicBtn();
+        }
+    });
+
+    /* Rebusca la canción desde cero (p. ej., si el archivo se copió en la
+       carpeta audio/ DESPUÉS de abrir la página, o cambió de nombre). */
+    function ensureMusicLoaded() {
+        if (musicResolved || musicOK) return;
+        var now = Date.now();
+        if (now - lastScan < 1500) return;
+        lastScan = now;
+        musicIdx = 0;
+        musicOK = true;
+        setMusicHint('');
+        audio.src = MUSIC_SOURCES[0];
+    }
+
+    function startMusicIfWanted() {
+        if (!musicOK || !musicWanted) return;
+        var p = audio.play();
+        if (p && p.catch) p.catch(function () {});
+    }
+
+    /* Cualquier clic o tecla activa / reactiva la música */
+    function userGestureMusic() {
+        ensureMusicLoaded();
+        if (musicWanted && musicOK && audio.paused) startMusicIfWanted();
+    }
+    document.addEventListener('pointerdown', userGestureMusic, true);
+    document.addEventListener('keydown', userGestureMusic, true);
+
+    function updateMusicBtn() {
+        var btn = document.getElementById('music-toggle');
+        if (!btn) return;
+        if (!musicOK) {
+            btn.classList.add('disabled');
+            btn.title = 'No se encuentra audio/Wheel of Time.mp3 / Cannot find audio/Wheel of Time.mp3';
+            return;
+        }
+        btn.classList.toggle('playing', !audio.paused);
+    }
+
+    document.getElementById('music-toggle').addEventListener('click', function () {
+        if (!musicOK) return;
+        if (audio.paused) {
+            musicWanted = true;
+            startMusicIfWanted();
+        } else {
+            musicWanted = false;
+            audio.pause();
+        }
+    });
+
+    /* ================= ENTRAR (cerrar intro) =================
+       La función porcadaEnter() (definida antes, a prueba de fallos)
+       hace el trabajo esencial; aquí se añaden la música y el vídeo
+       de fondo. El botón lleva además un onclick directo en el HTML,
+       de modo que funcionará aunque este script no llegara a cargarse. */
+    function enterSite() {
+        if (document.body.classList.contains('entered')) return;
+        porcadaEnter();
+        try { ensureMusicLoaded(); } catch (e) {}
+        try { startMusicIfWanted(); } catch (e) {}
+        try { startBgVideo(); } catch (e) {}
+    }
+    try {
+        document.getElementById('enter-btn').addEventListener('click', enterSite);
+    } catch (e) {}
+    document.addEventListener('keydown', function (e) {
+        if ((e.key === 'Enter' || e.key === 'Escape') && document.getElementById('intro-overlay')) {
+            try { enterSite(); } catch (err) { try { porcadaEnter(); } catch (e2) {} }
+        }
+    });
+
+    /* ================= IDIOMA ================= */
+    function updateLanguage(lang) {
+        currentLanguage = lang;
+        var dict = translations[lang];
+        Object.keys(dict).forEach(function (id) {
+            if (id === 'copyright' || id === 'rights') {
+                /* se actualizan igual, pero confirmamos abajo */
+            }
+            var el = document.getElementById(id);
+            if (el) el.innerHTML = dict[id];
+        });
+        document.documentElement.lang = lang;
+        document.getElementById('language-toggle').textContent = (lang === 'es') ? 'EN' : 'ES';
+        try { localStorage.setItem('porcada-lang', lang); } catch (e) {}
+    }
+
+    document.getElementById('language-toggle').addEventListener('click', function () {
+        updateLanguage(currentLanguage === 'es' ? 'en' : 'es');
+    });
+
+    /* ================= DESPLAZAMIENTO SUAVE ================= */
+    document.getElementById('scroll-hint').addEventListener('click', function () {
+        var t = document.getElementById('strategy');
+        if (t) t.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    /* ================= ANIMACIÓN DE APARICIÓN ================= */
+    function initReveal() {
+        if (!('IntersectionObserver' in window)) {
+            var all = document.querySelectorAll('.reveal');
+            for (var i = 0; i < all.length; i++) all[i].classList.add('visible');
+            return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (en) {
+                if (en.isIntersecting) {
+                    en.target.classList.add('visible');
+                    io.unobserve(en.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+    }
+
+    /* ================= INICIO ================= */
+    document.addEventListener('DOMContentLoaded', function () {
+        try {
+            var saved = localStorage.getItem('porcada-lang');
+            if (saved && translations[saved]) currentLanguage = saved;
+        } catch (e) {}
+        updateLanguage(currentLanguage);
+        tryVideoSource(0);
+        tryBgSource(0);
+        initReveal();
+        updateMusicBtn();
+        var eb = document.getElementById('enter-btn');
+        if (eb) eb.focus();
+    });
+</script>
+</body>
+</html>
