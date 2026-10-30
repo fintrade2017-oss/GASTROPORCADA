@@ -461,7 +461,7 @@
     <style>#intro-overlay{display:none}#bg-video-wrap{display:none}body{overflow:auto!important}body:not(.entered) #site-bar{opacity:1;transform:none;pointer-events:auto}</style>
 </noscript>
 
-<!-- ============ VÍDEO DE FONDO DEL DESARROLLO (PORCADAY3.MP4) ============ -->
+<!-- ============ VÍDEO DE FONDO DEL DESARROLLO (PORCADAY2.MP4) ============ -->
 <div id="bg-video-wrap" aria-hidden="true">
     <video id="bg-video-el" muted loop playsinline preload="auto"></video>
     <div class="bg-veil"></div>
@@ -717,16 +717,16 @@
     ];
 
     /* ============================================================
-       VÍDEO DE FONDO DEL DESARROLLO · PORCADAY3.MP4 (carpeta video/)
+       VÍDEO DE FONDO DEL DESARROLLO · PORCADAY2.MP4 (carpeta video/)
        Acompaña toda la presentación tras ENTRAR, SIEMPRE SILENCIADO
        (solo imagen). Si no se encuentra, la página vuelve
        automáticamente al diseño con imagen fija.
        ============================================================ */
     var BG_VIDEO_SOURCES = [
-        'video/PORCADAY3.MP4',
-        'video/porcaday3.mp4',
-        'video/PORCADAY3.mp4',
-        'video/Porcaday3.mp4'
+        'video/PORCADAY2.MP4',
+        'video/porcaday2.mp4',
+        'video/PORCADAY2.mp4',
+        'video/Porcaday2.mp4'
     ];
 
     /* ============================================================
@@ -956,7 +956,7 @@
         introVideo.addEventListener('error', function () { tryVideoSource(videoIdx + 1); });
     }
 
-    /* ================= VÍDEO DE FONDO (PORCADAY3) ================= */
+    /* ================= VÍDEO DE FONDO (PORCADAY2) ================= */
     var bgVideo = document.getElementById('bg-video-el');
     var bgIdx = 0;
 
