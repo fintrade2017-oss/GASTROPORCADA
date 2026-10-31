@@ -394,6 +394,24 @@
         #capacity-list .total strong { color: var(--gold); }
         #capacity-conclusion { margin: 26px 0 0; color: var(--stone); }
 
+        /* --- Nuevos orígenes de demanda (flujo ampliado) --- */
+        #capacity-demand-title {
+            margin: 34px 0 6px;
+            font-family: 'Jost', Arial, sans-serif;
+            font-size: 11px; font-weight: 500;
+            letter-spacing: .3em; text-transform: uppercase;
+            color: var(--gold);
+        }
+        #capacity-demand-list { list-style: none; margin: 0; padding: 0; }
+        #capacity-demand-list li {
+            padding: 12px 4px;
+            border-bottom: 1px solid var(--hair);
+            color: var(--stone);
+            font-size: .97em;
+        }
+        #capacity-demand-list li:last-child { border-bottom: none; }
+        #capacity-demand-list strong { color: var(--ink); font-weight: 500; }
+
         /* ============ FOOTER ============ */
         footer {
             background: var(--ink-deep);
@@ -461,7 +479,7 @@
     <style>#intro-overlay{display:none}#bg-video-wrap{display:none}body{overflow:auto!important}body:not(.entered) #site-bar{opacity:1;transform:none;pointer-events:auto}</style>
 </noscript>
 
-<!-- ============ VÍDEO DE FONDO DEL DESARROLLO (PORCADAY2.MP4) ============ -->
+<!-- ============ VÍDEO DE FONDO DEL DESARROLLO (PORCADAY3.MP4) ============ -->
 <div id="bg-video-wrap" aria-hidden="true">
     <video id="bg-video-el" muted loop playsinline preload="auto"></video>
     <div class="bg-veil"></div>
@@ -579,9 +597,11 @@
                 <h4 id="rest1-atmosphere-title">Ambiente:</h4>
                 <p id="rest1-atmosphere">Sofisticado pero relajado, con un diseño interior que integra maderas oscuras, piedra local pulida, iluminación ambiental cálida y detalles artesanales.</p>
                 <h4 id="rest1-capacity-title">Capacidad de Asientos en una sola sentada:</h4>
-                <p id="rest1-capacity">Aproximadamente 160 - 170 comensales.</p>
+                <p id="rest1-capacity">Aproximadamente 180 - 220 comensales.</p>
                 <h4 id="rest1-total-title">Estimación Total por Noche:</h4>
-                <p id="rest1-total">190 - 230 comensales.</p>
+                <p id="rest1-total">220 - 430 comensales.</p>
+                <h4 id="rest1-surface-title">Superficie Estimada (ajustada al nuevo volumen):</h4>
+                <p id="rest1-surface">Aproximadamente 450 - 550 m².</p>
             </div>
         </article>
 
@@ -599,9 +619,11 @@
                 <h4 id="rest2-atmosphere-title">Ambiente:</h4>
                 <p id="rest2-atmosphere">Fresco, luminoso y lleno de vida, con mucha luz natural, plantas colgantes, muebles de mimbre o bambú y toques de colores vibrantes.</p>
                 <h4 id="rest2-capacity-title">Capacidad de Asientos en una sola sentada:</h4>
-                <p id="rest2-capacity">Aproximadamente 140 comensales.</p>
+                <p id="rest2-capacity">Aproximadamente 200 - 250 comensales.</p>
                 <h4 id="rest2-total-title">Estimación Total por Noche:</h4>
-                <p id="rest2-total">210 - 250 comensales (si ofrece cena).</p>
+                <p id="rest2-total">240 - 520 comensales (si ofrece cena).</p>
+                <h4 id="rest2-surface-title">Superficie Estimada (ajustada al nuevo volumen):</h4>
+                <p id="rest2-surface">Aproximadamente 500 - 650 m².</p>
             </div>
         </article>
 
@@ -619,9 +641,11 @@
                 <h4 id="rest3-atmosphere-title">Ambiente:</h4>
                 <p id="rest3-atmosphere">Totalmente informal y playero-chic. Mesas de madera rústica, sillas o bancos cómodos, sombrillas de palma o velas tensionadas para sombra.</p>
                 <h4 id="rest3-capacity-title">Capacidad de Asientos en una sola sentada:</h4>
-                <p id="rest3-capacity">Aproximadamente 120 - 145 comensales.</p>
+                <p id="rest3-capacity">Aproximadamente 160 - 220 comensales.</p>
                 <h4 id="rest3-total-title">Estimación Total por Noche:</h4>
-                <p id="rest3-total">180 - 240 comensales.</p>
+                <p id="rest3-total">240 - 500 comensales.</p>
+                <h4 id="rest3-surface-title">Superficie Estimada (ajustada al nuevo volumen):</h4>
+                <p id="rest3-surface">Aproximadamente 450 - 600 m² (deck exterior).</p>
             </div>
         </article>
     </section>
@@ -634,14 +658,21 @@
         </div>
         <h2 id="capacity-title" class="reveal">Capacidad Total de Servicio</h2>
         <div class="capacity-summary reveal">
-            <p id="capacity-subtitle" class="capacity-lead">Capacidad Total de Servicio de Restaurantes por Noche (para 160 habitaciones):</p>
+            <p id="capacity-subtitle" class="capacity-lead">Capacidad Total de Servicio de Restaurantes por Noche (flujo ampliado, para 160 habitaciones y demanda externa):</p>
             <ul id="capacity-list">
-                <li id="capacity-item1"><strong>"Tierra y Sabor"</strong> (Interior, formal): 190 - 230 comensales</li>
-                <li id="capacity-item2"><strong>"El Jardín Tropical"</strong> (Interior, casual): 210 - 250 comensales (en cena)</li>
-                <li id="capacity-item3"><strong>"Fuego y Sal"</strong> (Exterior, barbacoa): 180 - 240 comensales</li>
-                <li id="capacity-item-total" class="total"><strong>Total Estimado Combinado:</strong> 580 - 720 comensales por noche.</li>
+                <li id="capacity-item1"><strong>"Tierra y Sabor"</strong> (Interior, formal): 220 - 430 comensales</li>
+                <li id="capacity-item2"><strong>"El Jardín Tropical"</strong> (Interior, casual): 240 - 520 comensales (en cena)</li>
+                <li id="capacity-item3"><strong>"Fuego y Sal"</strong> (Exterior, barbacoa): 240 - 500 comensales</li>
+                <li id="capacity-item-total" class="total"><strong>Total Estimado Combinado:</strong> 700 - 1450 comensales por noche.</li>
             </ul>
-            <p id="capacity-conclusion">Esta capacidad combinada es sobradamente suficiente para un resort de 160 habitaciones (320-400 huéspedes), garantizando que todos los huéspedes puedan cenar cómodamente.</p>
+            <h4 id="capacity-demand-title">Nuevos orígenes de demanda considerados:</h4>
+            <ul id="capacity-demand-list">
+                <li id="capacity-demand1">Huéspedes del resort: 160 habitaciones, incluidas <strong>suites de 4 pax</strong> (familias con hijos).</li>
+                <li id="capacity-demand2">Visitantes del <strong>casino</strong> (comensales no hospedados).</li>
+                <li id="capacity-demand3">Invitados de las <strong>villas de la orilla</strong>.</li>
+                <li id="capacity-demand4">Comensales procedentes de las <strong>Oasis</strong> (ocupación mínima: 40 comensales).</li>
+            </ul>
+            <p id="capacity-conclusion">Con este flujo real de comensales, la horquilla de servicio se sitúa entre 700 y 1450 comensales por noche: un volumen que los tres restaurantes, con sus espacios ampliados, pueden absorber con comodidad y sin saturación.</p>
         </div>
     </section>
 
@@ -668,7 +699,7 @@
                 <h4 id="bar1-atmosphere-title">Atmósfera:</h4>
                 <p id="bar1-atmosphere">De lujo sereno, con una iluminación tenue y cálida que resalta las texturas naturales. El mobiliario será de diseño, con sofás y sillones cómodos.</p>
                 <h4 id="bar1-surface-title">Superficie Estimada:</h4>
-                <p id="bar1-surface">Aproximadamente 200 - 250 m².</p>
+                <p id="bar1-surface">Aproximadamente 250 - 300 m².</p>
             </div>
         </article>
 
@@ -686,7 +717,7 @@
                 <h4 id="bar2-atmosphere-title">Atmósfera:</h4>
                 <p id="bar2-atmosphere">Casual y tropical, con una estructura de techo tipo palapa o pérgolas de bambú que proporcionan sombra. El suelo podría ser una combinación de deck de madera y arena compactada.</p>
                 <h4 id="bar2-surface-title">Superficie Estimada:</h4>
-                <p id="bar2-surface">Aproximadamente 100 - 150 m² (como parte de la superficie total del 'Fuego y Sal').</p>
+                <p id="bar2-surface">Aproximadamente 150 - 200 m² (como parte de la superficie total del 'Fuego y Sal').</p>
             </div>
         </article>
     </section>
@@ -717,16 +748,16 @@
     ];
 
     /* ============================================================
-       VÍDEO DE FONDO DEL DESARROLLO · PORCADAY2.MP4 (carpeta video/)
+       VÍDEO DE FONDO DEL DESARROLLO · PORCADAY3.MP4 (carpeta video/)
        Acompaña toda la presentación tras ENTRAR, SIEMPRE SILENCIADO
        (solo imagen). Si no se encuentra, la página vuelve
        automáticamente al diseño con imagen fija.
        ============================================================ */
     var BG_VIDEO_SOURCES = [
-        'video/PORCADAY2.MP4',
-        'video/porcaday2.mp4',
-        'video/PORCADAY2.mp4',
-        'video/Porcaday2.mp4'
+        'video/PORCADAY3.MP4',
+        'video/porcaday3.mp4',
+        'video/PORCADAY3.mp4',
+        'video/Porcaday3.mp4'
     ];
 
     /* ============================================================
@@ -784,9 +815,11 @@
             "rest1-atmosphere-title": "Ambiente:",
             "rest1-atmosphere": "Sofisticado pero relajado, con un diseño interior que integra maderas oscuras, piedra local pulida, iluminación ambiental cálida y detalles artesanales.",
             "rest1-capacity-title": "Capacidad de Asientos en una sola sentada:",
-            "rest1-capacity": "Aproximadamente 160 - 170 comensales.",
+            "rest1-capacity": "Aproximadamente 180 - 220 comensales.",
             "rest1-total-title": "Estimación Total por Noche:",
-            "rest1-total": "190 - 230 comensales.",
+            "rest1-total": "220 - 430 comensales.",
+            "rest1-surface-title": "Superficie Estimada (ajustada al nuevo volumen):",
+            "rest1-surface": "Aproximadamente 450 - 550 m².",
             "rest2-title": '2. Segundo Restaurante Interior: "El Jardín Tropical"',
             "rest2-desc": "Un concepto más casual y luminoso, perfecto para el desayuno y el almuerzo, y una cena más relajada con un toque de frescura.",
             "rest2-concept-title": "Concepto:",
@@ -796,9 +829,11 @@
             "rest2-atmosphere-title": "Ambiente:",
             "rest2-atmosphere": "Fresco, luminoso y lleno de vida, con mucha luz natural, plantas colgantes, muebles de mimbre o bambú y toques de colores vibrantes.",
             "rest2-capacity-title": "Capacidad de Asientos en una sola sentada:",
-            "rest2-capacity": "Aproximadamente 140 comensales.",
+            "rest2-capacity": "Aproximadamente 200 - 250 comensales.",
             "rest2-total-title": "Estimación Total por Noche:",
-            "rest2-total": "210 - 250 comensales (si ofrece cena).",
+            "rest2-total": "240 - 520 comensales (si ofrece cena).",
+            "rest2-surface-title": "Superficie Estimada (ajustada al nuevo volumen):",
+            "rest2-surface": "Aproximadamente 500 - 650 m².",
             "rest3-title": '3. Restaurante Exterior: "Fuego y Sal"',
             "rest3-desc": "Este es el concepto más auténtico y relajado, la joya de la corona para una experiencia al aire libre.",
             "rest3-concept-title": "Concepto:",
@@ -808,16 +843,23 @@
             "rest3-atmosphere-title": "Ambiente:",
             "rest3-atmosphere": "Totalmente informal y playero-chic. Mesas de madera rústica, sillas o bancos cómodos, sombrillas de palma o velas tensionadas para sombra.",
             "rest3-capacity-title": "Capacidad de Asientos en una sola sentada:",
-            "rest3-capacity": "Aproximadamente 120 - 145 comensales.",
+            "rest3-capacity": "Aproximadamente 160 - 220 comensales.",
             "rest3-total-title": "Estimación Total por Noche:",
-            "rest3-total": "180 - 240 comensales.",
+            "rest3-total": "240 - 500 comensales.",
+            "rest3-surface-title": "Superficie Estimada (ajustada al nuevo volumen):",
+            "rest3-surface": "Aproximadamente 450 - 600 m² (deck exterior).",
             "capacity-title": "Capacidad Total de Servicio",
-            "capacity-subtitle": "Capacidad Total de Servicio de Restaurantes por Noche (para 160 habitaciones):",
-            "capacity-item1": '<strong>"Tierra y Sabor"</strong> (Interior, formal): 190 - 230 comensales',
-            "capacity-item2": '<strong>"El Jardín Tropical"</strong> (Interior, casual): 210 - 250 comensales (en cena)',
-            "capacity-item3": '<strong>"Fuego y Sal"</strong> (Exterior, barbacoa): 180 - 240 comensales',
-            "capacity-item-total": '<strong>Total Estimado Combinado:</strong> 580 - 720 comensales por noche.',
-            "capacity-conclusion": "Esta capacidad combinada es sobradamente suficiente para un resort de 160 habitaciones (320-400 huéspedes), garantizando que todos los huéspedes puedan cenar cómodamente.",
+            "capacity-subtitle": "Capacidad Total de Servicio de Restaurantes por Noche (flujo ampliado, para 160 habitaciones y demanda externa):",
+            "capacity-item1": '<strong>"Tierra y Sabor"</strong> (Interior, formal): 220 - 430 comensales',
+            "capacity-item2": '<strong>"El Jardín Tropical"</strong> (Interior, casual): 240 - 520 comensales (en cena)',
+            "capacity-item3": '<strong>"Fuego y Sal"</strong> (Exterior, barbacoa): 240 - 500 comensales',
+            "capacity-item-total": '<strong>Total Estimado Combinado:</strong> 700 - 1450 comensales por noche.',
+            "capacity-demand-title": "Nuevos orígenes de demanda considerados:",
+            "capacity-demand1": 'Huéspedes del resort: 160 habitaciones, incluidas <strong>suites de 4 pax</strong> (familias con hijos).',
+            "capacity-demand2": 'Visitantes del <strong>casino</strong> (comensales no hospedados).',
+            "capacity-demand3": 'Invitados de las <strong>villas de la orilla</strong>.',
+            "capacity-demand4": 'Comensales procedentes de las <strong>Oasis</strong> (ocupación mínima: 40 comensales).',
+            "capacity-conclusion": "Con este flujo real de comensales, la horquilla de servicio se sitúa entre 700 y 1450 comensales por noche: un volumen que los tres restaurantes, con sus espacios ampliados, pueden absorber con comodidad y sin saturación.",
             "bars-title": "Servicio de Bar",
             "bars-intro": "Con 160 habitaciones, ofrecer opciones de bar que se adapten a diferentes momentos del día y preferencias es clave.",
             "bar1-title": '1. Bar Lounge Interior: "Atardecer Lounge"',
@@ -829,7 +871,7 @@
             "bar1-atmosphere-title": "Atmósfera:",
             "bar1-atmosphere": "De lujo sereno, con una iluminación tenue y cálida que resalta las texturas naturales. El mobiliario será de diseño, con sofás y sillones cómodos.",
             "bar1-surface-title": "Superficie Estimada:",
-            "bar1-surface": "Aproximadamente 200 - 250 m².",
+            "bar1-surface": "Aproximadamente 250 - 300 m².",
             "bar2-title": '2. Bar de Playa y Piscina: "Brisas y Ritmo"',
             "bar2-desc": "Este bar será el complemento perfecto para el restaurante 'Fuego y Sal', ofreciendo una experiencia más animada y tropical.",
             "bar2-concept-title": "Concepto:",
@@ -839,7 +881,7 @@
             "bar2-atmosphere-title": "Atmósfera:",
             "bar2-atmosphere": "Casual y tropical, con una estructura de techo tipo palapa o pérgolas de bambú que proporcionan sombra. El suelo podría ser una combinación de deck de madera y arena compactada.",
             "bar2-surface-title": "Superficie Estimada:",
-            "bar2-surface": "Aproximadamente 100 - 150 m² (como parte de la superficie total del 'Fuego y Sal').",
+            "bar2-surface": "Aproximadamente 150 - 200 m² (como parte de la superficie total del 'Fuego y Sal').",
             "rights": "Todos los derechos reservados",
             "copyright": "&copy; 2026 ECORESORT LA PORCADA by TAKYMA INVESTMENT PIONEER"
         },
@@ -869,9 +911,11 @@
             "rest1-atmosphere-title": "Ambiance:",
             "rest1-atmosphere": "Sophisticated yet relaxed, with an interior design that integrates dark woods, polished local stone, warm ambient lighting, and artisanal details.",
             "rest1-capacity-title": "Seating Capacity per Service:",
-            "rest1-capacity": "Approximately 160 - 170 diners.",
+            "rest1-capacity": "Approximately 180 - 220 diners.",
             "rest1-total-title": "Estimated Total per Night:",
-            "rest1-total": "190 - 230 diners.",
+            "rest1-total": "220 - 430 diners.",
+            "rest1-surface-title": "Estimated Surface Area (adjusted to the new volume):",
+            "rest1-surface": "Approximately 450 - 550 m².",
             "rest2-title": '2. Second Indoor Restaurant: "El Jardín Tropical" (The Tropical Garden)',
             "rest2-desc": "A more casual and bright concept, perfect for breakfast and lunch, and a more relaxed dinner with a touch of freshness.",
             "rest2-concept-title": "Concept:",
@@ -881,9 +925,11 @@
             "rest2-atmosphere-title": "Ambiance:",
             "rest2-atmosphere": "Fresh, bright, and lively, with plenty of natural light, hanging plants, wicker or bamboo furniture, and vibrant colors inspired by tropical flowers.",
             "rest2-capacity-title": "Seating Capacity per Service:",
-            "rest2-capacity": "Approximately 140 diners.",
+            "rest2-capacity": "Approximately 200 - 250 diners.",
             "rest2-total-title": "Estimated Total per Night:",
-            "rest2-total": "210 - 250 diners (if it offers dinner).",
+            "rest2-total": "240 - 520 diners (if it offers dinner).",
+            "rest2-surface-title": "Estimated Surface Area (adjusted to the new volume):",
+            "rest2-surface": "Approximately 500 - 650 m².",
             "rest3-title": '3. Outdoor Restaurant: "Fuego y Sal" (Fire & Salt)',
             "rest3-desc": "This is the most authentic and relaxed concept, the crown jewel for an outdoor experience.",
             "rest3-concept-title": "Concept:",
@@ -893,16 +939,23 @@
             "rest3-atmosphere-title": "Ambiance:",
             "rest3-atmosphere": "Completely informal and beach-chic. Rustic wooden tables, comfortable chairs or benches, palm thatch umbrellas, or tensioned sails for shade.",
             "rest3-capacity-title": "Seating Capacity per Service:",
-            "rest3-capacity": "Approximately 120 - 145 diners.",
+            "rest3-capacity": "Approximately 160 - 220 diners.",
             "rest3-total-title": "Estimated Total per Night:",
-            "rest3-total": "180 - 240 diners.",
+            "rest3-total": "240 - 500 diners.",
+            "rest3-surface-title": "Estimated Surface Area (adjusted to the new volume):",
+            "rest3-surface": "Approximately 450 - 600 m² (outdoor deck).",
             "capacity-title": "Total Service Capacity",
-            "capacity-subtitle": "Total Restaurant Service Capacity per Night (for 160 rooms):",
-            "capacity-item1": '<strong>"Tierra y Sabor"</strong> (Indoor, formal): 190 - 230 diners',
-            "capacity-item2": '<strong>"El Jardín Tropical"</strong> (Indoor, casual): 210 - 250 diners (for dinner)',
-            "capacity-item3": '<strong>"Fuego y Sal"</strong> (Outdoor, BBQ): 180 - 240 diners',
-            "capacity-item-total": '<strong>Estimated Combined Total:</strong> 580 - 720 diners per night.',
-            "capacity-conclusion": "This combined capacity is more than sufficient for a 160-room resort (320-400 guests), ensuring all guests can dine comfortably without feeling crowded and with a wide variety of experiences to choose from.",
+            "capacity-subtitle": "Total Restaurant Service Capacity per Night (expanded flow, for 160 rooms plus external demand):",
+            "capacity-item1": '<strong>"Tierra y Sabor"</strong> (Indoor, formal): 220 - 430 diners',
+            "capacity-item2": '<strong>"El Jardín Tropical"</strong> (Indoor, casual): 240 - 520 diners (for dinner)',
+            "capacity-item3": '<strong>"Fuego y Sal"</strong> (Outdoor, BBQ): 240 - 500 diners',
+            "capacity-item-total": '<strong>Estimated Combined Total:</strong> 700 - 1450 diners per night.',
+            "capacity-demand-title": "New demand sources considered:",
+            "capacity-demand1": 'Resort guests: 160 rooms, including <strong>4-pax suites</strong> (families with children).',
+            "capacity-demand2": '<strong>Casino</strong> visitors (non-hosted diners).',
+            "capacity-demand3": 'Guests of the <strong>shorefront villas</strong>.',
+            "capacity-demand4": 'Diners coming from the <strong>Oasis</strong> (minimum occupancy: 40 diners).',
+            "capacity-conclusion": "With this real flow of diners, nightly service ranges from 700 to 1450 diners: a volume that the three restaurants, with their enlarged spaces, can absorb comfortably and without crowding.",
             "bars-title": "Bar Service",
             "bars-intro": "With 160 rooms, offering bar options that adapt to different times of the day and preferences is key.",
             "bar1-title": '1. Indoor Lounge Bar: "Atardecer Lounge" (Sunset Lounge)',
@@ -914,7 +967,7 @@
             "bar1-atmosphere-title": "Ambiance:",
             "bar1-atmosphere": "Serene luxury, with soft, warm lighting that highlights natural textures. The furniture will be designer, with comfortable sofas and armchairs upholstered in linen and cotton.",
             "bar1-surface-title": "Estimated Surface Area:",
-            "bar1-surface": "Approximately 200 - 250 m².",
+            "bar1-surface": "Approximately 250 - 300 m².",
             "bar2-title": '2. Pool & Beach Bar: "Brisas y Ritmo" (Breezes & Rhythm)',
             "bar2-desc": "This bar will be the perfect complement to the 'Fuego y Sal' restaurant, offering a more lively and tropical experience.",
             "bar2-concept-title": "Concept:",
@@ -924,7 +977,7 @@
             "bar2-atmosphere-title": "Ambiance:",
             "bar2-atmosphere": "Casual and tropical, with a thatched roof or bamboo pergolas providing shade. The flooring could be a combination of wooden decking and compacted sand.",
             "bar2-surface-title": "Estimated Surface Area:",
-            "bar2-surface": "Approximately 100 - 150 m² (as part of the total area of 'Fuego y Sal').",
+            "bar2-surface": "Approximately 150 - 200 m² (as part of the total area of 'Fuego y Sal').",
             "rights": "All rights reserved",
             "copyright": "&copy; 2026 ECORESORT LA PORCADA by TAKYMA INVESTMENT PIONEER"
         }
@@ -956,7 +1009,7 @@
         introVideo.addEventListener('error', function () { tryVideoSource(videoIdx + 1); });
     }
 
-    /* ================= VÍDEO DE FONDO (PORCADAY2) ================= */
+    /* ================= VÍDEO DE FONDO (PORCADAY3) ================= */
     var bgVideo = document.getElementById('bg-video-el');
     var bgIdx = 0;
 
@@ -1162,3 +1215,4 @@
 </script>
 </body>
 </html>
+
